@@ -1,0 +1,1312 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title></title>
+
+<script src="libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap-3.3.5/css/lumen.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="libs/navigation-1.1/tabsets.js"></script>
+<link href="libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="styles-curso.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="fluid-row" id="header">
+
+
+
+
+</div>
+
+
+<div class="titulo">
+<p>UAG-LICENCIATURA EM PEDAGOGIA</p>
+</div>
+<hr />
+<div id="introducao" class="section level1">
+<h1><span class="header-section-number">1</span> Introdução</h1>
+<p>Em 2018, a Comissão Propria de Avaliação (CPA) da Universidade Federal Rural de Pernambuco (UFRPE) realizou a autoavaliação institucional referente aos eixos Politicas de Gestão e Infraestrutura. Esta avaliação foi feita a partir de questionários online, disponibilizados de forma voluntária aos discentes, docentes e técnicos da instituição, no período 07 de maio a 05 de setembro de 2018. Maiores detalhes sobre a metodologia de autoavaliação podem ser encontrados no Relatório Geral.</p>
+<p>Este relatório apresenta as respostas dos discentes, separadas por curso. Como docentes e técnicos não são vinculados a cursos, e sim a unidades, departamentos ou orgãos, as suas respostas não estão contempladas neste relatório de cursos.</p>
+<div class="warning">
+<p>Note que este relatório apresenta os resultados da avaliação da UFRPE <em>como um todo</em> sob o ponto de vista dos estudantes deste curso; sendo assim, não pode ser interpretado como uma avaliação do curso propriamente dito.</p>
+</div>
+</div>
+<div id="participacao" class="section level1">
+<h1><span class="header-section-number">2</span> Participação</h1>
+<p>Este curso contava com 226 discentes aptos a participar desta avaliação, dos quais 53 (23.45%) responderam ao questionário. Foram utilizados os resultados absolutos de participação, sem análise estatística. Como a participação em alguns cursos foi baixa, essas respostas podem não representar a realidade, apresentando apenas um parâmetro de como os discentes avaliaram os eixos de Políticas de Gestão e Infraestrutura. De igual forma, os itens que se destacaram com maiores e menores médias de cada eixo são apresentadas de forma conjunta.</p>
+<p>Do total das respostas obtidas para os itens dos dois eixos avaliados, 19.23% foram avaliados como “insuficiente”, 23.32% como “regular”, 29.09% como “bom”, 12.84% foram considerados “excelente”, e 15.51% responderam “não sabe/não se aplica”.</p>
+</div>
+<div id="maiores-medias" class="section level1">
+<h1><span class="header-section-number">3</span> Maiores médias</h1>
+<p>Lista das 5 perguntas com respostas mais positivas, com base na média ponderada das respostas dos discentes deste curso.</p>
+<table class="table table-hover" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;background-color: lightgreen;">
+Item
+</th>
+<th style="text-align:right;background-color: lightgreen;">
+Média
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Atuação da coordenação do seu curso
+</td>
+<td style="text-align:right;">
+8.3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Serviços de limpeza e jardinagem no campus
+</td>
+<td style="text-align:right;">
+8.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sistema de Informações e Gestão Acadêmica (SIG@ UFRPE)
+</td>
+<td style="text-align:right;">
+7.7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Horário de funcionamento da biblioteca
+</td>
+<td style="text-align:right;">
+7.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Atuação do Colegiado de Coordenação Didática (CCD) do seu curso
+</td>
+<td style="text-align:right;">
+7.0
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="menores-medias" class="section level1">
+<h1><span class="header-section-number">4</span> Menores médias</h1>
+<p>Lista das 5 perguntas com respostas mais negativas, com base na média ponderada das respostas dos discentes deste curso.</p>
+<table class="table table-hover" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;background-color: orange;">
+Item
+</th>
+<th style="text-align:right;background-color: orange;">
+Média
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Restaurante Universitário (RU)
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Segurança do campus
+</td>
+<td style="text-align:right;">
+2.7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Acervo da biblioteca
+</td>
+<td style="text-align:right;">
+3.3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Atuação do CONSU e CEPE
+</td>
+<td style="text-align:right;">
+3.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Serviços de saúde (atendimentos médico, odontológico e psicológico)
+</td>
+<td style="text-align:right;">
+3.5
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="panorama-perguntas-selecionadas" class="section level1">
+<h1><span class="header-section-number">5</span> Panorama (perguntas selecionadas)</h1>
+<p>Esta seção contém gráficos com os resultados da avaliação de 5 itens pré-selecionados: Atuação da Coordenação de Curso, Atuação do Colegiado de Coordenação Didática (CCD), Acervo da Biblioteca, Quantidade de Laboratórios de Ensino, e Qualidade dos Equipamentos de Laboratórios de Ensino. Note que em alguns cursos a utilização de laboratórios de ensino não é pertinente.</p>
+<p><img src="UAG-LICENCIATURA_EM_PEDAGOGIA_-_UAG_files/figure-html/unnamed-chunk-4-1.png" width="648" /><img src="UAG-LICENCIATURA_EM_PEDAGOGIA_-_UAG_files/figure-html/unnamed-chunk-4-2.png" width="648" /><img src="UAG-LICENCIATURA_EM_PEDAGOGIA_-_UAG_files/figure-html/unnamed-chunk-4-3.png" width="648" /><img src="UAG-LICENCIATURA_EM_PEDAGOGIA_-_UAG_files/figure-html/unnamed-chunk-4-4.png" width="648" /><img src="UAG-LICENCIATURA_EM_PEDAGOGIA_-_UAG_files/figure-html/unnamed-chunk-4-5.png" width="648" /></p>
+</div>
+<div id="resultado-completo-discentes" class="section level1">
+<h1><span class="header-section-number">6</span> Resultado completo (discentes)</h1>
+<table class="table table-striped" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+Média
+</th>
+<th style="text-align:left;">
+Item
+</th>
+<th style="text-align:center;">
+Insuficiente (0)
+</th>
+<th style="text-align:center;">
+Regular (5)
+</th>
+<th style="text-align:center;">
+Bom (7.5)
+</th>
+<th style="text-align:center;">
+Excelente (10)
+</th>
+<th style="text-align:center;">
+NS/NA
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+8.3
+</td>
+<td style="text-align:left;">
+Atuação da coordenação do seu curso
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(71, 47, 125, 1);font-size: 13.5px;">5</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(68, 59, 132, 1);font-size: 15px;">4</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(59, 81, 139, 1);font-size: 15px;">8</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(187, 223, 39, 1);font-size: 24px;">36</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(68, 1, 84, 1);font-size: 12px;">0</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+8.0
+</td>
+<td style="text-align:left;">
+Serviços de limpeza e jardinagem no campus
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(71, 13, 96, 1);font-size: 12px;">2</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(68, 59, 132, 1);font-size: 15px;">4</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(127, 211, 78, 1);font-size: 22.5px;">26</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(31, 150, 139, 1);font-size: 19.5px;">21</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(68, 1, 84, 1);font-size: 12px;">0</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+7.7
+</td>
+<td style="text-align:left;">
+Sistema de Informações e Gestão Acadêmica (SIG@ UFRPE)
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(71, 13, 96, 1);font-size: 12px;">2</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(48, 106, 142, 1);font-size: 16.5px;">8</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(108, 205, 90, 1);font-size: 22.5px;">25</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(37, 131, 142, 1);font-size: 18px;">18</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(68, 1, 84, 1);font-size: 12px;">0</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+7.1
+</td>
+<td style="text-align:left;">
+Horário de funcionamento da biblioteca
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(71, 13, 96, 1);font-size: 12px;">2</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(32, 147, 140, 1);font-size: 19.5px;">12</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(187, 223, 39, 1);font-size: 24px;">29</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(59, 82, 139, 1);font-size: 15px;">10</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(68, 1, 84, 1);font-size: 12px;">0</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+7.0
+</td>
+<td style="text-align:left;">
+Atuação do Colegiado de Coordenação Didática (CCD) do seu curso
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(72, 36, 117, 1);font-size: 13.5px;">4</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(43, 116, 142, 1);font-size: 16.5px;">9</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(33, 165, 133, 1);font-size: 19.5px;">19</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(53, 96, 141, 1);font-size: 16.5px;">12</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(62, 75, 138, 1);font-size: 15px;">9</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+7.0
+</td>
+<td style="text-align:left;">
+Conhecimento sobre o trabalho da PROGESTI
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(68, 57, 131, 1);font-size: 13.5px;">6</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(39, 127, 142, 1);font-size: 18px;">10</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(31, 158, 137, 1);font-size: 19.5px;">18</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(39, 126, 142, 1);font-size: 18px;">17</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(72, 20, 102, 1);font-size: 12px;">2</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+7.0
+</td>
+<td style="text-align:left;">
+Quantitativo de servidores da biblioteca
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(68, 1, 84, 1);font-size: 12px;">1</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(60, 188, 116, 1);font-size: 21px;">16</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(145, 215, 66, 1);font-size: 22.5px;">27</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(65, 68, 135, 1);font-size: 15px;">8</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(70, 10, 93, 1);font-size: 12px;">1</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+6.7
+</td>
+<td style="text-align:left;">
+Infraestrutura dos auditórios
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(68, 57, 131, 1);font-size: 13.5px;">6</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(35, 138, 141, 1);font-size: 18px;">11</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(90, 200, 100, 1);font-size: 22.5px;">24</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(53, 96, 141, 1);font-size: 16.5px;">12</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(68, 1, 84, 1);font-size: 12px;">0</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+6.6
+</td>
+<td style="text-align:left;">
+Infraestrutura das salas de aula
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(71, 47, 125, 1);font-size: 13.5px;">5</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(34, 168, 132, 1);font-size: 19.5px;">14</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(108, 205, 90, 1);font-size: 22.5px;">25</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(62, 75, 138, 1);font-size: 15px;">9</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(68, 1, 84, 1);font-size: 12px;">0</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+6.4
+</td>
+<td style="text-align:left;">
+Acesso à internet wireless
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(71, 47, 125, 1);font-size: 13.5px;">5</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(31, 158, 137, 1);font-size: 19.5px;">13</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(31, 158, 137, 1);font-size: 19.5px;">18</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(62, 75, 138, 1);font-size: 15px;">9</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(65, 68, 135, 1);font-size: 15px;">8</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+6.4
+</td>
+<td style="text-align:left;">
+Processos de consulta (eleição) para cargos de gestão (reitoria, departamentos, unidades acadêmicas e coordenações de curso)
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(72, 36, 117, 1);font-size: 13.5px;">4</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(60, 188, 116, 1);font-size: 21px;">16</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(38, 173, 129, 1);font-size: 21px;">20</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(67, 61, 132, 1);font-size: 15px;">7</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(69, 53, 129, 1);font-size: 13.5px;">6</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+6.3
+</td>
+<td style="text-align:left;">
+Acesso à internet banda larga
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(65, 68, 135, 1);font-size: 15px;">7</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(31, 158, 137, 1);font-size: 19.5px;">13</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(35, 136, 142, 1);font-size: 18px;">15</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(56, 89, 140, 1);font-size: 15px;">11</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(67, 61, 132, 1);font-size: 15px;">7</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+5.8
+</td>
+<td style="text-align:left;">
+Infraestrutura das salas de audiovisual
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(65, 68, 135, 1);font-size: 15px;">7</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(32, 147, 140, 1);font-size: 19.5px;">12</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(31, 150, 139, 1);font-size: 19.5px;">17</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(71, 45, 122, 1);font-size: 13.5px;">5</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(53, 96, 141, 1);font-size: 16.5px;">12</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+5.8
+</td>
+<td style="text-align:left;">
+Manutenção das instalações prediais
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(57, 87, 140, 1);font-size: 15px;">9</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(81, 196, 106, 1);font-size: 21px;">17</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(31, 158, 137, 1);font-size: 19.5px;">18</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(65, 68, 135, 1);font-size: 15px;">8</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(70, 10, 93, 1);font-size: 12px;">1</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+5.6
+</td>
+<td style="text-align:left;">
+Instalações dos banheiros, copas e área de convívio
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(45, 113, 142, 1);font-size: 16.5px;">12</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(31, 158, 137, 1);font-size: 19.5px;">13</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(38, 173, 129, 1);font-size: 21px;">20</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(65, 68, 135, 1);font-size: 15px;">8</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(68, 1, 84, 1);font-size: 12px;">0</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+5.4
+</td>
+<td style="text-align:left;">
+Qualidade dos equipamentos dos laboratórios de pesquisa
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(61, 77, 138, 1);font-size: 15px;">8</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(45, 178, 125, 1);font-size: 21px;">15</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(31, 150, 139, 1);font-size: 19.5px;">17</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(72, 28, 110, 1);font-size: 13.5px;">3</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(59, 82, 139, 1);font-size: 15px;">10</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+5.2
+</td>
+<td style="text-align:left;">
+Conhecimento sobre instruções normativas (estatuto da UFRPE, regimentos, resoluções)
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(61, 77, 138, 1);font-size: 15px;">8</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(60, 188, 116, 1);font-size: 21px;">16</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(31, 150, 139, 1);font-size: 19.5px;">17</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(70, 10, 93, 1);font-size: 12px;">1</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(56, 89, 140, 1);font-size: 15px;">11</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+5.2
+</td>
+<td style="text-align:left;">
+Qualidade dos equipamentos dos laboratórios de ensino
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(53, 96, 141, 1);font-size: 16.5px;">10</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(187, 223, 39, 1);font-size: 24px;">21</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(35, 136, 142, 1);font-size: 18px;">15</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(72, 36, 117, 1);font-size: 13.5px;">4</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(72, 28, 110, 1);font-size: 13.5px;">3</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+5.1
+</td>
+<td style="text-align:left;">
+Transparência na aplicação dos recursos orçamentários
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(53, 96, 141, 1);font-size: 16.5px;">10</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(32, 147, 140, 1);font-size: 19.5px;">12</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(35, 136, 142, 1);font-size: 18px;">15</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(72, 28, 110, 1);font-size: 13.5px;">3</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(49, 102, 142, 1);font-size: 16.5px;">13</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+5.0
+</td>
+<td style="text-align:left;">
+Acesso ao campus (transporte público)
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(49, 104, 142, 1);font-size: 16.5px;">11</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(187, 223, 39, 1);font-size: 24px;">21</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(44, 113, 142, 1);font-size: 16.5px;">12</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(71, 45, 122, 1);font-size: 13.5px;">5</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(72, 36, 117, 1);font-size: 13.5px;">4</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+4.9
+</td>
+<td style="text-align:left;">
+Conhecimento sobre atribuições do(a) Diretor(a) Geral da Unidade Acadêmica
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(45, 113, 142, 1);font-size: 16.5px;">12</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(34, 168, 132, 1);font-size: 19.5px;">14</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(33, 144, 141, 1);font-size: 18px;">16</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(72, 28, 110, 1);font-size: 13.5px;">3</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(65, 68, 135, 1);font-size: 15px;">8</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+4.9
+</td>
+<td style="text-align:left;">
+Iluminação no campus
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(42, 120, 142, 1);font-size: 18px;">13</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(132, 212, 75, 1);font-size: 22.5px;">19</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(38, 129, 142, 1);font-size: 18px;">14</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(71, 45, 122, 1);font-size: 13.5px;">5</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(72, 20, 102, 1);font-size: 12px;">2</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+4.9
+</td>
+<td style="text-align:left;">
+Quantitativo de laboratórios de ensino
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(45, 113, 142, 1);font-size: 16.5px;">12</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(132, 212, 75, 1);font-size: 22.5px;">19</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(33, 144, 141, 1);font-size: 18px;">16</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(72, 28, 110, 1);font-size: 13.5px;">3</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(72, 28, 110, 1);font-size: 13.5px;">3</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+4.8
+</td>
+<td style="text-align:left;">
+Acessibilidade física para pessoas com necessidades especiais
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(33, 145, 140, 1);font-size: 18px;">16</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(60, 188, 116, 1);font-size: 21px;">16</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(44, 113, 142, 1);font-size: 16.5px;">12</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(65, 68, 135, 1);font-size: 15px;">8</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(70, 10, 93, 1);font-size: 12px;">1</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+4.8
+</td>
+<td style="text-align:left;">
+Conhecimento sobre atribuições de Diretores de Departamento (campus dois irmãos)
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(71, 47, 125, 1);font-size: 13.5px;">5</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(48, 106, 142, 1);font-size: 16.5px;">8</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(66, 64, 134, 1);font-size: 15px;">6</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(70, 10, 93, 1);font-size: 12px;">1</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(138, 214, 71, 1);font-size: 22.5px;">33</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+4.8
+</td>
+<td style="text-align:left;">
+Quantitativo de laboratórios de pesquisa
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(49, 104, 142, 1);font-size: 16.5px;">11</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(45, 178, 125, 1);font-size: 21px;">15</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(33, 144, 141, 1);font-size: 18px;">16</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(70, 10, 93, 1);font-size: 12px;">1</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(59, 82, 139, 1);font-size: 15px;">10</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+4.4
+</td>
+<td style="text-align:left;">
+Infraestrutura da biblioteca (iluminação, climatização, acústica)
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(31, 152, 139, 1);font-size: 19.5px;">17</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(132, 212, 75, 1);font-size: 22.5px;">19</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(41, 121, 142, 1);font-size: 18px;">13</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(72, 36, 117, 1);font-size: 13.5px;">4</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(68, 1, 84, 1);font-size: 12px;">0</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+4.3
+</td>
+<td style="text-align:left;">
+Conhecimento sobre o trabalho da PREG
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(34, 168, 132, 1);font-size: 19.5px;">19</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(48, 106, 142, 1);font-size: 16.5px;">8</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(31, 158, 137, 1);font-size: 19.5px;">18</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(72, 28, 110, 1);font-size: 13.5px;">3</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(71, 45, 122, 1);font-size: 13.5px;">5</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+4.2
+</td>
+<td style="text-align:left;">
+Funcionamento do ônibus circular da UFRPE
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(53, 96, 141, 1);font-size: 16.5px;">10</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(32, 147, 140, 1);font-size: 19.5px;">12</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(59, 81, 139, 1);font-size: 15px;">8</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(70, 10, 93, 1);font-size: 12px;">1</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(30, 156, 137, 1);font-size: 19.5px;">22</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+4.0
+</td>
+<td style="text-align:left;">
+Conhecimento sobre o trabalho da PRPPG
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(42, 120, 142, 1);font-size: 18px;">13</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(63, 72, 137, 1);font-size: 15px;">5</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(51, 98, 141, 1);font-size: 16.5px;">10</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(72, 20, 102, 1);font-size: 12px;">2</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(31, 162, 135, 1);font-size: 19.5px;">23</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+3.6
+</td>
+<td style="text-align:left;">
+Conhecimento sobre o trabalho da PRAE
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(31, 152, 139, 1);font-size: 19.5px;">17</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(71, 45, 123, 1);font-size: 13.5px;">3</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(41, 121, 142, 1);font-size: 18px;">13</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(70, 10, 93, 1);font-size: 12px;">1</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(35, 139, 141, 1);font-size: 18px;">19</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+3.5
+</td>
+<td style="text-align:left;">
+Atuação do CONSU e CEPE
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(61, 77, 138, 1);font-size: 15px;">8</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(68, 59, 132, 1);font-size: 15px;">4</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(71, 45, 122, 1);font-size: 13.5px;">4</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(70, 10, 93, 1);font-size: 12px;">1</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(187, 223, 39, 1);font-size: 24px;">36</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+3.5
+</td>
+<td style="text-align:left;">
+Serviços de saúde (atendimentos médico, odontológico e psicológico)
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(41, 175, 127, 1);font-size: 21px;">20</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(39, 127, 142, 1);font-size: 18px;">10</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(51, 98, 141, 1);font-size: 16.5px;">10</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(72, 20, 102, 1);font-size: 12px;">2</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(56, 89, 140, 1);font-size: 15px;">11</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+3.3
+</td>
+<td style="text-align:left;">
+Acervo da biblioteca
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(102, 203, 93, 1);font-size: 22.5px;">24</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(159, 218, 58, 1);font-size: 24px;">20</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(62, 73, 137, 1);font-size: 15px;">7</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(72, 20, 102, 1);font-size: 12px;">2</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(68, 1, 84, 1);font-size: 12px;">0</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2.7
+</td>
+<td style="text-align:left;">
+Segurança do campus
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(187, 223, 39, 1);font-size: 24px;">28</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(60, 188, 116, 1);font-size: 21px;">16</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(62, 73, 137, 1);font-size: 15px;">7</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(70, 10, 93, 1);font-size: 12px;">1</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(70, 10, 93, 1);font-size: 12px;">1</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+0.0
+</td>
+<td style="text-align:left;">
+Restaurante Universitário (RU)
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(31, 161, 136, 1);font-size: 19.5px;">18</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(68, 1, 84, 1);font-size: 12px;">0</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(68, 1, 84, 1);font-size: 12px;">0</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(68, 1, 84, 1);font-size: 12px;">0</span>
+</td>
+<td style="text-align:center;">
+<span style=" font-weight: bold;    color: rgba(171, 220, 50, 1);font-size: 24px;">35</span>
+</td>
+</tr>
+</tbody>
+</table>
+<p><em>NS/NA: Não sabe/não se aplica</em></p>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+
+</body>
+</html>
